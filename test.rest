@@ -1,0 +1,17 @@
+GET HTTP://127.0.0.1:8000/test_token
+Content-Type: application/json
+Authorization: Token 9b2f7421ef0008255a33832a4d0bb276d816fe44
+
+###
+
+POST HTTP://127.0.0.1:8000/login
+Content-Type: application/json
+
+{ "username": "admin", "password": "lazyeyegame"}
+
+###
+
+POST HTTP://127.0.0.1:8000/signup
+Content-Type: application/json
+
+{ "username": "srt", "password": "srt", "email": "em@fd.com"}
