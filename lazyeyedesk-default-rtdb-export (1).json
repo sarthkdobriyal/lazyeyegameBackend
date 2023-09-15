@@ -1,0 +1,163 @@
+{
+  "Doctorslist": {
+    "doctors": [
+      {
+        "homePatients": [
+          {
+            "category": "Home",
+            "contactno": "321",
+            "dob": "15-02-2001",
+            "email": "patient@lazyeyegame.com",
+            "firstname": "das",
+            "gender": "Male",
+            "lastname": "das",
+            "location": "rty",
+            "mrdNumber": "fgt",
+            "username": "das",
+            "password": "ss"
+          }
+        ],
+        "name": "Dr. John"
+      }
+    ],
+    "fb2": {
+      "instanceID": 34342
+    }
+  },
+  "GameData": {
+    "patients": [
+      {
+        "Games": {
+          "Pacman": [
+            {
+              "highScore": "12",
+              "month": "June",
+              "playtime": ""
+            },
+            {
+              "highScore": "10",
+              "month": "July",
+              "playtime": ""
+            }
+          ]
+        },
+        "patientname": "patient1@gmail.com"
+      },
+      {
+        "Games": {
+          "Pacman": [
+            {
+              "highScore": "12",
+              "month": "June",
+              "playtime": ""
+            }
+          ]
+        },
+        "patientname": "patient2@gmail.com"
+      },
+      {
+        "Games": {
+          "Pacman": [
+            {
+              "highScore": "33",
+              "month": "Mays",
+              "playtime": ""
+            }
+          ]
+        },
+        "patientname": "patient2"
+      }
+    ]
+  },
+  "GameSpec": {
+    "patients": [
+      {
+        "games": {
+          "pacman": {
+            "colour": "cyan",
+            "level": "5"
+          },
+          "rollex": {
+            "colour": "green",
+            "level": "7"
+          },
+          "tetris": {
+            "colour": "blue",
+            "level": "8"
+          }
+        },
+        "patientname": "John"
+      },
+      {
+        "games": {
+          "pacman": {
+            "colour": "cyan",
+            "level": "4"
+          },
+          "rollex": {
+            "colour": "0",
+            "level": "0"
+          },
+          "tetris": {
+            "colour": "0",
+            "level": "0"
+          }
+        },
+        "patientname": "Santhosh"
+      },
+      {
+        "games": {
+          "pacman": {
+            "colour": "0",
+            "level": "0"
+          },
+          "rollex": {
+            "colour": "0",
+            "level": "0"
+          },
+          "tetris": {
+            "colour": "cyan",
+            "level": "0"
+          }
+        },
+        "patientname": "Raghav"
+      }
+    ]
+  },
+  "Login Credentials": {
+    "doctors": [
+      {
+        "name": "Dr. Robert Johnson",
+        "password": "docpass1",
+        "username": "doctor1@gmail.com"
+      },
+      {
+        "name": "Dr. Emily Wilson",
+        "password": "docpass2",
+        "username": "doctor2@gmail.com"
+      }
+    ],
+    "patients": [
+      {
+        "contactno": "123654789",
+        "dob": "02.05.2001",
+        "firstname": "patient1",
+        "lastname": "pa1XXXX",
+        "name": "John Smith",
+        "password": "pass123",
+        "patienttype": "inoffice",
+        "username": "patient1@gmail.com"
+      },
+      {
+        "contactno": "123654789",
+        "dob": "07.05.2001",
+        "firstname": "patient2",
+        "lastname": "pa2XXXX",
+        "name": "Jane Doe",
+        "password": "pass456",
+        "patienttype": "hometheraphy",
+        "username": "patient2@gmail.com"
+      }
+    ]
+  }
+}

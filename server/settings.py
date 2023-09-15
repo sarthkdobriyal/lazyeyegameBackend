@@ -25,7 +25,7 @@ SECRET_KEY = 'o7%k2hpv5u+k(=&3r6wve+b3owfhr_5@p@3z*oaw55qa2d_cut'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken', 
-    'accounts'
+    'accounts',
+    'games'
 ]
 
 MIDDLEWARE = [
@@ -78,9 +79,13 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'lazyeyegame',
+       'USER': 'postgres',
+       'PASSWORD': 'recon123',
+       'HOST': 'localhost',
+       'PORT': '5432',
+   }
 }
 
 

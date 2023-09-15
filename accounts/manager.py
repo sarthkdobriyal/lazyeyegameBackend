@@ -2,40 +2,47 @@ from django.contrib.auth.models import BaseUserManager
 
 
 class AccountManager(BaseUserManager):
-    def create_superuser(self, username, password, **extra_fields):
-        if not username:
+    def create_superuser(self, email, password, **extra_fields):
+        if not email:
+            raise ValueError('The given email must be set')
+        if not password:
+            raise ValueError("The password must be set")
+        extra_fields.setdefault('is_active', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('role', 1)
+
+
+        if extra_fields.get('role') != 1:
+            raise ValueError('Superuser must have role of Global Admin')
+        return self.create_user(email, password, **extra_fields)
+
+    def create_staffuser(self,  email, password, **extra_fields):
+        if not email:
             raise ValueError('The given username must be set')
-        extra_fields['email'] = self.normalize_email(extra_fields['email'])
-        user = self.model(username=username, password=password, **extra_fields)
+        if not password:
+            raise ValueError("The password must be set")
+        extra_fields.setdefault('is_active', True)
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault('role', 2)
+        # email = self.normalize_email('email')
+        print(email)
+        user = self.model(email=email, password=password , **extra_fields)
         user.set_password(password)
-        user.is_active = True
-        user.is_doctor = True
-        user.is_superuser = True
-        user.save(using=self._db)
+        user.save()
+        #using=self._db
         return user
 
-    def create_staffuser(self,  username, password, **extra_fields):
-        if not username:
-            raise ValueError('The given username must be set')
-        extra_fields['email'] = self.normalize_email(extra_fields['email'])
-        user = self.model(username=username, password=password , **extra_fields)
+    def create_user(self, email, password, **extra_fields):
+        if not email:
+            raise ValueError("The email must be set")
+        if not password:
+            raise ValueError("The password must be set")
+        email = self.normalize_email(email)
+        extra_fields.setdefault('role', 3)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
-        user.is_active = True
-        user.is_doctor = True
-        user.is_superuser = False
-        user.save(using=self._db)
-        return user
-
-    def create_user(self, username, password, **extra_fields):
-        if not username:
-            raise ValueError('The given username must be set')
-        extra_fields['email'] = self.normalize_email(extra_fields['email'])
-        user = self.model( username=username, password=password, **extra_fields)
-        user.set_password(password)
-        user.is_active = True
-        user.is_doctor = False
-        user.is_superuser = False
-        user.save(using=self._db)
+        user.save()
         return user
 
     def get_by_natural_key(self, username_):
