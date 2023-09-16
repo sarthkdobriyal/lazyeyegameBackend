@@ -8,22 +8,20 @@ Authorization: Token 6827a2c107a043b18a0fe7db6465e75bd72ec8d3
 POST HTTP://127.0.0.1:2222/login
 Content-Type: application/json
 
-{ "username": "doctor2", "password": "1234"}
+{ "username": "doctor1", "password": "1234"}
 
 
 ###
 
 POST HTTP://127.0.0.1:2222/signup
 Content-Type: application/json
-Authorization: Token 425525c02ad1207feab9eece4e7472e831e8d170
+Authorization: Token a409320b6b40f90b622320cc0ba38cc4a5695528
 # Authorization: Token a409320b6b40f90b622320cc0ba38cc4a5695528
 
-
-
 {
-    "username": "p2d2",
+    "username": "p1d1",
     "password": "1234",
-    "email": "p2d2@lazyeyegame.com",
+    "email": "p1d1@lazyeyegame.com",
     "role": 3,
     "firstname": "dd",
     "lastname": "dsda"
@@ -34,15 +32,30 @@ Authorization: Token 425525c02ad1207feab9eece4e7472e831e8d170
 
 GET HTTP://127.0.0.1:2222/doctor/patients
 Content-Type: application/json
-Authorization: Token 425525c02ad1207feab9eece4e7472e831e8d170
+Authorization: Token a409320b6b40f90b622320cc0ba38cc4a5695528
 ###
 
-PATCH HTTP://127.0.0.1:2222/doctor/patient/10
+
+DELETE HTTP://127.0.0.1:2222/doctor/patient/11
+Content-Type: application/json
+Authorization: Token 425525c02ad1207feab9eece4e7472e831e8d170
+
+
+###
+
+PATCH HTTP://127.0.0.1:2222/doctor/patient/11/toggleactive
+Content-Type: application/json
+Authorization: Token 425525c02ad1207feab9eece4e7472e831e8d170
+
+
+###
+
+PATCH HTTP://127.0.0.1:2222/doctor/patient/11
 Content-Type: application/json
 Authorization: Token 425525c02ad1207feab9eece4e7472e831e8d170
 
 {
-    "firstname": "edited",
+    "firstname": "edited1",
     "gender": "female",
     "location": "america"
 }
@@ -50,13 +63,13 @@ Authorization: Token 425525c02ad1207feab9eece4e7472e831e8d170
 ###
 
 
-PATCH HTTP://127.0.0.1:2222/editgame/game/tetris/patient/11
+PATCH HTTP://127.0.0.1:2222/editgame/game/pacman/patient/11
 Content-Type: application/json
 Authorization: Token 425525c02ad1207feab9eece4e7472e831e8d170
 
 {
     "color": "blue",
-    "level": 2
+    "level": 3
 }
 
 ###
