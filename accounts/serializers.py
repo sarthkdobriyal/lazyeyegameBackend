@@ -6,7 +6,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = [
-            'username', 'password', 'email', 'role', "firstname", "lastname"
+            'username', 'password', 'email', 'role', "firstname", "lastname", 'tenant'
         ]
 
     def validate(self, data): 
@@ -24,6 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
                 lastname=validated_data['lastname'],
                 password=validated_data['password'],
                 role=validated_data['role'],
+                tenant=validated_data['tenant']
         )
             user.set_password(validated_data['password'])
             user.save()
@@ -36,6 +37,7 @@ class UserSerializer(serializers.ModelSerializer):
                 lastname=validated_data['lastname'],
                 password=validated_data['password'],
                 role=validated_data['role'],
+                tenant=validated_data['tenant']
         )
             user.set_password(validated_data['password'])
             user.save()

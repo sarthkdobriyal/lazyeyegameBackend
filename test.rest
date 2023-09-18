@@ -8,23 +8,27 @@ Authorization: Token 6827a2c107a043b18a0fe7db6465e75bd72ec8d3
 POST HTTP://127.0.0.1:2222/login
 Content-Type: application/json
 
-{ "username": "doctor1", "password": "1234"}
+# { "username": "admin", "password": "qwerty"}
+{ "username": "doc1", "password": "1234"}
 
 
 ###
 
 POST HTTP://127.0.0.1:2222/signup
 Content-Type: application/json
-Authorization: Token a409320b6b40f90b622320cc0ba38cc4a5695528
+Authorization: Token 6d3a03c35cae88cc5363016cc0a770ccfd93464a
+X-Request-Id: b73fb4c4-6747-4184-8854-876cfad01365
+
 # Authorization: Token a409320b6b40f90b622320cc0ba38cc4a5695528
 
 {
-    "username": "p1d1",
+    "username": "doc1p1",
     "password": "1234",
-    "email": "p1d1@lazyeyegame.com",
+    "email": "doc1p1@lazyeyegame.com",
     "role": 3,
-    "firstname": "dd",
-    "lastname": "dsda"
+    "firstname": "ddaf",
+    "lastname": "dsdaffa",
+    "tenant": 5
 }
 
 
@@ -32,7 +36,8 @@ Authorization: Token a409320b6b40f90b622320cc0ba38cc4a5695528
 
 GET HTTP://127.0.0.1:2222/doctor/patients
 Content-Type: application/json
-Authorization: Token a409320b6b40f90b622320cc0ba38cc4a5695528
+Authorization: Token 6d3a03c35cae88cc5363016cc0a770ccfd93464a
+X-Request-Id: b73fb4c4-6747-4184-8854-876cfad01365
 ###
 
 
@@ -63,9 +68,10 @@ Authorization: Token 425525c02ad1207feab9eece4e7472e831e8d170
 ###
 
 
-PATCH HTTP://127.0.0.1:2222/editgame/game/pacman/patient/11
+PATCH HTTP://127.0.0.1:2222/editgame/game/tetris/patient/5
 Content-Type: application/json
-Authorization: Token 425525c02ad1207feab9eece4e7472e831e8d170
+Authorization: Token 002dd8cdcacc03148fb3f33f32b0a8d53e87b5e5
+X-Request-Id: 7a44900a-170f-4437-ace8-c910f4d26d04
 
 {
     "color": "blue",

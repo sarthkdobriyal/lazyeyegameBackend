@@ -11,6 +11,8 @@ from rest_framework.authtoken.models import Token
 
 from accounts.serializers import UserSerializer
 from accounts.models import DoctorPatientRelationship, Account
+from tenant.models import Tenant
+from tenant.serializers import TenantSerializer
 
 User = get_user_model()
 
@@ -26,16 +28,26 @@ class UserList(generics.ListCreateAPIView):
 def signup(request):
     if request.data['role'] == 1 or request.data['role'] == 2  and request.user.role != 1:
         return Response("Error", status=status.HTTP_401_UNAUTHORIZED)
-    print(request.data)
+    print( "Requestdata --> ", request.data)
     serializer = UserSerializer(data=request.data)
     print(serializer.is_valid())
     if serializer.is_valid():
-        print("valid")
+        print("data valid")
         serializer.save()
         user = User.objects.get(username=request.data['username'])
         user.set_password(request.data['password'])
-        if request.user.role == 2:
-            print(request.user.id, user.id)
+        print('user created', user)
+        if request.user.role == 1:
+            print("Creating tenant")
+            tenant = Tenant(schema_name=request.data['username'], tenant_name=request.data['username'] )
+            tenant.save()
+            user.tenant = tenant
+        else:
+            print('getting tenant')
+            tenant = Tenant.objects.get(id=request.data['tenant'])
+            user.tenant = tenant
+        if request.user.role == 2 and request.data['role'] == 3:
+            print('Doctor patient rln' ,request.user.id, user.id)
             doctor = Account.objects.get(id=request.user.id)
             patient = Account.objects.get(id=user.id)
             DoctorPatientRelationship.objects.create(doctor=doctor, patient=patient)
@@ -51,7 +63,8 @@ def login(request):
         return Response("missing user", status=status.HTTP_404_NOT_FOUND)
     token, created = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(user)
-    return Response({'token': token.key, 'user': serializer.data})
+    tenant = TenantSerializer(Tenant.objects.get(id=user.tenant.id)).data
+    return Response({'token': token.key, 'user': serializer.data , 'tenant': tenant})
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])

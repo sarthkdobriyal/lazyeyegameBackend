@@ -30,7 +30,10 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-INSTALLED_APPS = [
+
+SHARED_APPS = (
+    'tenant_schemas',
+    'tenant',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,10 +43,35 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken', 
     'accounts',
-    'games'
+)
+
+
+TENANT_APPS = (
+    'django.contrib.contenttypes',
+    'games',
+    'doctors'
+)
+
+TENANT_MODEL = 'tenant.Tenant'
+
+INSTALLED_APPS = [
+    'tenant_schemas',
+    'tenant',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken', 
+    'accounts',
+    'games',
+    'doctors'
 ]
 
 MIDDLEWARE = [
+    'tenant.middleware.RequestIDTenantMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,7 +107,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.postgresql',
+       'ENGINE': 'tenant_schemas.postgresql_backend',
        'NAME': 'lazyeyegame',
        'USER': 'postgres',
        'PASSWORD': 'recon123',
@@ -88,6 +116,9 @@ DATABASES = {
    }
 }
 
+DATABASE_ROUTERS = (
+    'tenant_schemas.routers.TenantSyncRouter',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

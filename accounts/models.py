@@ -55,7 +55,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     mrdnumber = models.CharField(max_length=50, null=True, blank=True)
     modified_date = models.DateTimeField(default=timezone.now)
 
-    # tenant = models.ForeignKey('tenant.Tenant', on_delete=models.CASCADE, null=True, blank=False)
+    tenant = models.ForeignKey('tenant.Tenant', on_delete=models.CASCADE, null=True, blank=False)
 
     REQUIRED_FIELDS = ['email', 'password']
     USERNAME_FIELD = 'username'
