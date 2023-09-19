@@ -8,8 +8,8 @@ Authorization: Token 6827a2c107a043b18a0fe7db6465e75bd72ec8d3
 POST HTTP://127.0.0.1:2222/login
 Content-Type: application/json
 
-# { "username": "admin", "password": "qwerty"}
-{ "username": "doc1", "password": "1234"}
+# { "username": "doc1", "password": "1234"}
+{ "username": "admin", "password": "qwerty"}
 
 
 ###
