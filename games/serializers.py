@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import PacmanData, RollexData, TetrisData
+from .models import *
 
 
 class PacmanSerializer(serializers.ModelSerializer):
@@ -15,4 +15,9 @@ class RollexSerializer(serializers.ModelSerializer):
 class TetrisSerializer(serializers.ModelSerializer):
     class Meta:
         model =  TetrisData
+        fields = '__all__'
+        
+class GameDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model =  GameData
         fields = '__all__'

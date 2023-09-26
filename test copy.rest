@@ -1,0 +1,119 @@
+GET HTTP://65.109.138.88/test_token
+Content-Type: application/json
+# Authorization: Token 9b2f7421ef0008255a33832a4d0bb276d816fe44
+Authorization: Token 6827a2c107a043b18a0fe7db6465e75bd72ec8d3
+
+###
+
+POST HTTP://65.109.138.88/login
+Content-Type: application/json
+
+# { "username": "admin", "password": "qwerty"}
+# { "username": "doc1p1", "password": "1234"}
+{ "username": "doc1", "password": "1234"}
+
+
+###
+
+
+POST HTTP://65.109.138.88/signup
+Content-Type: application/json
+# Authorization: Token 7a689b27a7deb1c1c5ece0f110a71540bdde16d4
+# X-Request-Id: 2b5342ac-8ff9-4982-b2ae-6c1444194b01
+Authorization: Token 4ec49c75e794f410059d8b9f59e0f9ec83199928
+X-Request-Id: 68b3cfb3-f4d6-4435-b88e-6f4609ee61ae
+
+
+{
+    "username": "doc1ptest",
+    "password": "1234",
+    "email": "doc1ptest@lazyeyegame.com",
+    "role": 3,
+    "firstname": "ddf",
+    "lastname": "daffa",
+    "tenant": 4,
+    "category": "home"
+}
+
+
+###
+
+GET HTTP://65.109.138.88/doctor/patients
+Content-Type: application/json
+Authorization: Token 4ec49c75e794f410059d8b9f59e0f9ec83199928
+X-Request-Id: 68b3cfb3-f4d6-4435-b88e-6f4609ee61ae
+###
+
+
+GET HTTP://65.109.138.88/doctor/patient/3
+Content-Type: application/json
+Authorization: Token 4ec49c75e794f410059d8b9f59e0f9ec83199928
+X-Request-Id: 68b3cfb3-f4d6-4435-b88e-6f4609ee61ae
+
+
+###
+
+DELETE HTTP://65.109.138.88/doctor/patient/3
+Content-Type: application/json
+Authorization: Token 4ec49c75e794f410059d8b9f59e0f9ec83199928
+X-Request-Id: 68b3cfb3-f4d6-4435-b88e-6f4609ee61ae
+
+
+###
+
+PATCH HTTP://65.109.138.88/doctor/patient/11/toggleactive
+Content-Type: application/json
+Authorization: Token 4ec49c75e794f410059d8b9f59e0f9ec83199928
+X-Request-Id: 68b3cfb3-f4d6-4435-b88e-6f4609ee61ae
+
+
+###
+
+PATCH HTTP://65.109.138.88/doctor/patient/3/edit
+Content-Type: application/json
+Authorization: Token 4ec49c75e794f410059d8b9f59e0f9ec83199928
+X-Request-Id: 68b3cfb3-f4d6-4435-b88e-6f4609ee61ae
+
+{
+    "firstname": "edited1",
+    "gender": "female",
+    "location": "america"
+}
+
+###
+
+
+PATCH HTTP://65.109.138.88/game/rollex/patient/3/gamespecs
+Content-Type: application/json
+Authorization: Token 4ec49c75e794f410059d8b9f59e0f9ec83199928
+X-Request-Id: 68b3cfb3-f4d6-4435-b88e-6f4609ee61ae
+
+{
+    "color": "pink",
+    "level": 1
+}
+
+###
+
+GET HTTP://65.109.138.88/game/tetris/patient/3/gamedata
+Content-Type: application/json
+Authorization: Token 4ec49c75e794f410059d8b9f59e0f9ec83199928
+X-Request-Id: 68b3cfb3-f4d6-4435-b88e-6f4609ee61ae
+
+
+###
+
+POST HTTP://65.109.138.88/game/tetris/patient/3/gamedata/edit
+Content-Type: application/json
+Authorization: Token 9dcdde43a96d9a6af2091d8fb99b45a35562f2b0
+X-Request-Id: 68b3cfb3-f4d6-4435-b88e-6f4609ee61ae
+
+{
+    "highscore": 10,
+    "playtime": 240
+}
+
+###
+
+
+

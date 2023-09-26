@@ -108,9 +108,9 @@ WSGI_APPLICATION = 'server.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'tenant_schemas.postgresql_backend',
-       'NAME': 'lazyeyegame',
+       'NAME': 'postgres',
        'USER': 'postgres',
-       'PASSWORD': 'recon123',
+       'PASSWORD': 'postgres123',
        'HOST': 'localhost',
        'PORT': '5432',
    }

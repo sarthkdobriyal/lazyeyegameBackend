@@ -20,7 +20,10 @@ def getPatients(request):
         #get all the entries from doctorpatientrelationship where doctor is the current user in the list
         patient_ids = DoctorPatientRelationship.objects.filter(doctor=request.user).values_list('patient_id', flat=True)
         #get all the patients from the entries
-        patients = Account.objects.filter(id__in=patient_ids)
+        if(request.GET.get('category')):
+            patients = Account.objects.filter(id__in=patient_ids, category=request.GET.get('category'))
+        else:
+            patients = Account.objects.filter(id__in=patient_ids)
         print(patients)
         #return the patients
         serializer = PatientSerializer(patients, many=True)
@@ -30,17 +33,75 @@ def getPatients(request):
         resdata = {}
         for patient in patient_data_list:
             print(patient['id'])
-            gameData = {}
-            pacmanData = PacmanData.objects.filter(patient=patient['id'])
-            rollexData = RollexData.objects.filter(patient=patient['id'])
-            tetrisData = TetrisData.objects.filter(patient=patient['id'])
-            gameData['pacman'] = PacmanSerializer(pacmanData,many=True).data
-            gameData['rollex'] = RollexSerializer(rollexData,many=True).data
-            gameData['tetris'] = TetrisSerializer(tetrisData, many=True).data
-            patient['gameData'] = gameData
+            gameSpecs = {}
+            try:
+                pacmanData = PacmanData.objects.get(patient=patient['id'])
+                gameSpecs['pacman'] = PacmanSerializer(pacmanData).data
+            except PacmanData.DoesNotExist:
+                gameSpecs['pacman'] = {}
+            try:
+                rollexData = RollexData.objects.get(patient=patient['id'])
+                gameSpecs['rollex'] = RollexSerializer(rollexData).data
+            except RollexData.DoesNotExist:
+                gameSpecs['rollex'] = {}  # Add an empty object if data is not available
+            try:
+                tetrisData = TetrisData.objects.get(patient=patient['id'])
+                gameSpecs['tetris'] = TetrisSerializer(tetrisData).data
+            except TetrisData.DoesNotExist:
+                gameSpecs['tetris'] = {}
+            
+            patient['gameSpecs'] = gameSpecs
         resdata['patients'] = patient_data_list
         return Response(resdata, status=status.HTTP_200_OK)
     return Response("passed for {}".format(request.user.username))
+
+
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def getPatient(request, id):
+    if(request.user.role == 2):
+        
+        print("hello")
+        #Check if the doctor patient relnship exists for this user
+        if not DoctorPatientRelationship.objects.filter(patient=id, doctor=request.user.id).exists():
+            return Response("Patient not found", status=status.HTTP_404_NOT_FOUND)
+
+        #get all the patients from the entries
+        patient = Account.objects.get(id=id)
+        print(patient)
+
+
+        #return the patients
+        serializer = PatientSerializer(patient)
+        patient_data = serializer.data
+        gameSpecs = {}
+        try:
+            pacmanData = PacmanData.objects.get(patient=id)
+            gameSpecs['pacman'] = PacmanSerializer(pacmanData).data
+        except PacmanData.DoesNotExist:
+            gameSpecs['pacman'] = {}  # Add an empty object if data is not available
+
+        try:
+            rollexData = RollexData.objects.get(patient=id)
+            gameSpecs['rollex'] = RollexSerializer(rollexData).data
+        except RollexData.DoesNotExist:
+            gameSpecs['rollex'] = {}  # Add an empty object if data is not available
+
+        try:
+            tetrisData = TetrisData.objects.get(patient=id)
+            gameSpecs['tetris'] = TetrisSerializer(tetrisData).data
+        except TetrisData.DoesNotExist:
+            gameSpecs['tetris'] = {}
+        patient_data['gameSpecs'] = gameSpecs
+        return Response(patient_data, status=status.HTTP_200_OK)
+    return Response({"error": "You are not authorized to view this patient"}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+
+
+
 
 @api_view(['PATCH'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])

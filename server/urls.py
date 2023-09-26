@@ -11,5 +11,5 @@ urlpatterns = [
     re_path('signup', views.signup),
     re_path('test_token', views.test_token),
     re_path('doctor/',include('doctors.urls')),
-    re_path('editgame/',include('games.urls')),
+    re_path('game/',include('games.urls')),
 ]

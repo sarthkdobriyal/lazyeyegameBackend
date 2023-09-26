@@ -12,7 +12,7 @@ from .manager import AccountManager
 
 # Create your models here.
 USERNAME_PATTERN = '^[a-z0-9+]{2,25}$'
-USERNAME_ERROR_MESSAGE = 'invalid username format'
+USERNAME_ERROR_MESSAGE = 'Username must consist of 2 to 25 characters and can only contain lowercase letters and digits'
 
 
 class Account(AbstractBaseUser, PermissionsMixin):
