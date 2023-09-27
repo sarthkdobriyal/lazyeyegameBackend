@@ -48,6 +48,7 @@ SHARED_APPS = (
 
 TENANT_APPS = (
     'django.contrib.contenttypes',
+    'django.contrib.admin',
     'games',
     'doctors'
 )
@@ -110,7 +111,7 @@ DATABASES = {
        'ENGINE': 'tenant_schemas.postgresql_backend',
        'NAME': 'postgres',
        'USER': 'postgres',
-       'PASSWORD': 'postgres123',
+       'PASSWORD': 'post123',
        'HOST': 'localhost',
        'PORT': '5432',
    }
@@ -158,3 +159,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
