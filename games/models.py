@@ -26,5 +26,5 @@ class GameData(models.Model):
     patient = models.ForeignKey('accounts.Account', on_delete=models.CASCADE, null=True, blank=False)
     game = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
-    highscore = models.PositiveIntegerField(default=0)
-    playtime = models.PositiveIntegerField(default=0)
+    highscore = models.CharField(default="")
+    playtime = models.CharField(default="")

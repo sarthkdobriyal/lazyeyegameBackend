@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'o7%k2hpv5u+k(=&3r6wve+b3owfhr_5@p@3z*oaw55qa2d_cut'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -114,7 +114,16 @@ DATABASES = {
        'PASSWORD': 'post123',
        'HOST': 'localhost',
        'PORT': '5432',
-   }
+   },
+#     'default': {
+#        'ENGINE': 'tenant_schemas.postgresql_backend',
+#        'NAME': 'db',
+#        'USER': 'postgres',
+#        'PASSWORD': 'post123',
+#        'HOST': '0.0.0.0',
+#        'PORT': '5432',
+#    }
+
 }
 
 DATABASE_ROUTERS = (
